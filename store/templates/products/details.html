@@ -1,0 +1,38 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+          <div class="box-element product">
+                <center><h2>Product Details</h2></center>
+          </div>
+    </div>
+</div><br>
+
+<div class="row">
+      <div class="col-md-4">
+            <div class="box-element product">
+                  <img class = "thumbnail" src = "{{data.image.url}}">
+                  <div class="box product">
+                      <h6><strong> {{data.name}} </strong></h6>
+                  </div>
+            </div>
+      </div>
+
+      <div class="col-md-8">
+            <div class="box-element product">
+            <div class="box-element product">
+                  <h6><strong> {{data.details}} </strong></h6>
+                  <br>
+                  <h4><strong> {{data.brand}} </strong></h4>
+                  <h4 style="display: inline-block; float: right"><strong>{{data.price}} /- </strong></h4>
+                  <br><br>
+                  <hr>
+                  <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+            </div>
+            </div>
+      </div>
+</div>
+
+{% endblock content %}

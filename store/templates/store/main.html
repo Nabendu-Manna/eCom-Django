@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- CSS only -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/eCom.ico' %}">
+    <title>Django | eCom</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-dark ">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img rel="icon" type="image/x-icon" id="cart-icon" src="{% static 'images/eCom.ico' %}"> &ensp;
+        My Store
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index'%}">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" style="padding-right:10px;" action = "/search" method="GET">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+          <button class="btn btn-outline-success rounded my-2 my-sm-0" type="submit"><b> Search </b></button>
+        </form>
+        <div class="form-inline my-2 my-lg-0">
+          {% if user.is_authenticated %}
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <b>{{ user.get_username }}</b>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'cart' %}">Cart</a>
+                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'signout' %}">Sign Out</a>
+              </div>
+            </div>
+     	    <a href="{% url 'cart' %}">
+    		    <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+    	    </a>
+          <p class = "cartItems" id = "cart-total"></p>
+          {% else %}
+            <a href="{% url 'signin' %}"class="btn btn-warning rounded-left">Sign In</a>
+            <a href="{% url 'signup' %}"class="btn btn-warning rounded-right">Sign UP</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.ajax({
+        type: "get",
+        url: "/cartItems/",
+        data: {},
+        success: function(data){
+          $('.cartItems').append(data)
+        },
+        error: function(data){
+          $('.cartItems').html(data)
+        }
+    })
+  });
+</script>
+
+    <div class="container" style="min-height: 300px;">
+        {% block content %}
+
+        {% endblock content %}
+    </div>    
+    <br><br>
+    <!-- Footer -->
+<footer class="page-footer font-small bg-secondary" style="color: beige;">
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+        <!-- Content -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Footer Content</h5>
+        <p><b>I am Nabendu Manna.</b></p>
+        <p>This is a demo project built on Django(Python).</p>
+        <p><b>This is a demo project do not give any rel informatino!!!</b></p>
+      </div>
+      <!-- Grid column -->
+
+      <!-- <hr class="clearfix w-100 d-md-none"> -->
+
+      <!-- Grid column -->
+      <!-- <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+        <h5 class="font-weight-bold text-uppercase mb-4">About</h5>
+        <ul class="list-unstyled">
+          <li>
+            <p>
+              <a href="#!">PROJECTS</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="#!">ABOUT US</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="#!">BLOG</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="#!">AWARDS</a>
+            </p>
+          </li>
+        </ul>
+
+      </div> -->
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+        <!-- Contact details -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Address</h5>
+        <ul class="list-unstyled">
+          <li>
+            <p>
+              <!-- <i class="fas fa-home mr-3"></i>  -->
+              Kolkata, West Bengal, India</p>
+          </li>
+          <li>
+            <p>
+              <!-- <i class="fas fa-envelope mr-3"></i>  -->
+              mannanabendu2000@gmail.com</p>
+          </li>
+          <li>
+            <p>
+              <!-- <i class="fas fa-phone mr-3"></i>  -->
+              + 91 760 2706 496</p>
+          </li>
+          <li>
+            <p>
+              <!-- <i class="fas fa-print mr-3"></i>  -->
+              + 01 983 2570 790</p>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <!--<div class="col-md-2 col-lg-2 text-center mx-auto my-4">
+         Social buttons
+        <h5 class="font-weight-bold text-uppercase mb-4">Follow Us</h5>
+        <a type="button" class="btn-floating btn-fb">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a type="button" class="btn-floating btn-tw">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a type="button" class="btn-floating btn-gplus">
+          <i class="fab fa-google-plus-g"></i>
+        </a>
+        <a type="button" class="btn-floating btn-dribbble">
+          <i class="fab fa-dribbble"></i>
+        </a> 
+
+      </div>-->
+      <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+  </div>
+  <!-- Footer Links -->
+  <!-- Copyright -->
+  
+  <!-- Copyright -->
+</footer>
+<footer class="page-footer font-small" style="color: beige; background-color: rgb(46, 46, 46);">
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://nabendu.epizy.com/"> nabendu.epizy.com</a>
+  </div>
+</footer>
+<!-- Footer -->
+
+    <!-- JS, Popper.js, and jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+</body>
+
+</html>
