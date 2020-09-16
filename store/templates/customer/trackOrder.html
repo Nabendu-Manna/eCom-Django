@@ -1,0 +1,111 @@
+<style>
+    ol.progtrckr {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    ol.progtrckr li {
+        display: inline-block;
+        text-align: center;
+        line-height: 3em;
+    }
+    ol.progtrckr li { width: 32%; }
+/*
+    ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+    ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+    ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+    ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+    ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+    ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+    ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+    ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }*/
+
+    ol.progtrckr li.progtrckr-done {
+        color: black;
+        border-bottom: 4px solid yellowgreen;
+    }
+    ol.progtrckr li.progtrckr-todo {
+        color: silver; 
+        border-bottom: 4px solid silver;
+    }
+
+    ol.progtrckr li:after {
+        content: "\00a0\00a0";
+    }
+    ol.progtrckr li:before {
+        position: relative;
+        bottom: -2.5em;
+        float: left;
+        left: 50%;
+        line-height: 1em;
+    }
+    ol.progtrckr li.progtrckr-done:before {
+        content: "\2713";
+        color: white;
+        background-color: rgb(43, 216, 0);
+        box-shadow: -2.5px 3px 60px 25px rgb(187, 255, 0);
+        height: 1.2em;
+        width: 1.2em;
+        line-height: 1.2em;
+        border: none;
+        border-radius: 1.2em;
+    }
+    ol.progtrckr li.progtrckr-todo:before {
+        content: "\039F";
+        color: silver;
+        background-color: white;
+        font-size: 1.5em;
+        bottom: -1.6em;
+    }
+
+</style>
+
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<div class="row">
+    <div class="box-element product col-lg-12">
+        <!-- <div class="box-element product"> -->
+    {% if shippingAddress.status == 0 %}
+    <ol class="progtrckr" data-progtrckr-steps="5">
+        <li class="progtrckr-done">Processing</li>
+        <!-- <li class="progtrckr-todo">Pre-Production</li> -->
+        <!-- <li class="progtrckr-todo">In Production</li> -->
+        <li class="progtrckr-todo">Shipped</li>
+        <li class="progtrckr-todo">Delivered</li>
+    </ol>
+    {% elif shippingAddress.status == 1 %}
+    <ol class="progtrckr" data-progtrckr-steps="5">
+        <li class="progtrckr-done">Processing</li>
+        <!-- <li class="progtrckr-done">Pre-Production</li> -->
+        <!-- <li class="progtrckr-todo">In Production</li> -->
+        <li class="progtrckr-done">Shipped</li>
+        <li class="progtrckr-todo">Delivered</li>
+    </ol>
+    {% elif shippingAddress.status == 2 %}
+    <ol class="progtrckr" data-progtrckr-steps="5">
+        <li class="progtrckr-done">Processing</li>
+        <!-- <li class="progtrckr-done">Pre-Production</li> -->
+        <!-- <li class="progtrckr-done">In Production</li> -->
+        <li class="progtrckr-done">Shipped</li>
+        <li class="progtrckr-done">Delivered</li>
+    </ol>
+    {% else %}
+    <ol class="progtrckr" data-progtrckr-steps="5">
+        <li class="progtrckr-done">Processing</li>
+        <!-- <li class="progtrckr-done">Pre-Production</li>
+        <li class="progtrckr-done">In Production</li> -->
+        <li class="progtrckr-done">Shipped</li>
+        <li class="progtrckr-done">Delivered</li>
+    </ol>
+    {% endif %}
+    <br><br>
+<!-- </div> -->
+</div>
+</div>
+
+{% endblock content %}
