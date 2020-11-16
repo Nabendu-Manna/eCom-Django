@@ -21,9 +21,9 @@ h6 {
 .thumbnail {
     width: 100%;
     height: 200px;
-    -webkit-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+    /* -webkit-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
     -moz-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
-    box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+    box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1); */
 }
 
 .product {
@@ -82,12 +82,13 @@ h6 {
 
 .quantity {
     display: inline-block;
-    font-weight: 700;
+    font-weight: 900;
     padding-right: 10px;
+    text-align:center;
 }
 
 .chg-quantity {
-    width: 12px;
+    /* width: 12px; */
     cursor: pointer;
     display: block;
     margin-top: 5px;

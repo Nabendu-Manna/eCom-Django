@@ -19,7 +19,8 @@
     ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
     ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
     ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
-    ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }*/
+    ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+*/
 
     ol.progtrckr li.progtrckr-done {
         color: black;
@@ -37,7 +38,7 @@
         position: relative;
         bottom: -2.5em;
         float: left;
-        left: 50%;
+        left: 49%;
         line-height: 1em;
     }
     ol.progtrckr li.progtrckr-done:before {
@@ -65,47 +66,58 @@
 {% load static %}
 {% block content %}
 
-<br>
-<br>
+<div class="row box-element">
+    <div class="col-lg-12">
+        <div class="product">
+            <a class="btn btn-outline-dark float-left" href="{% url 'profile' %}">&#x21E6; </a><center><h2> Track Order </h2></center>
+        </div>
+    </div>
+</div><br>
+
 <div class="row">
-    <div class="box-element product col-lg-12">
+    <div class="box-element product col-12">
         <!-- <div class="box-element product"> -->
     {% if shippingAddress.status == 0 %}
-    <ol class="progtrckr" data-progtrckr-steps="5">
+    <ol class="progtrckr" data-progtrckr-steps="3">
         <li class="progtrckr-done">Processing</li>
-        <!-- <li class="progtrckr-todo">Pre-Production</li> -->
-        <!-- <li class="progtrckr-todo">In Production</li> -->
         <li class="progtrckr-todo">Shipped</li>
         <li class="progtrckr-todo">Delivered</li>
     </ol>
     {% elif shippingAddress.status == 1 %}
-    <ol class="progtrckr" data-progtrckr-steps="5">
+    <ol class="progtrckr" data-progtrckr-steps="3">
         <li class="progtrckr-done">Processing</li>
-        <!-- <li class="progtrckr-done">Pre-Production</li> -->
-        <!-- <li class="progtrckr-todo">In Production</li> -->
         <li class="progtrckr-done">Shipped</li>
         <li class="progtrckr-todo">Delivered</li>
     </ol>
     {% elif shippingAddress.status == 2 %}
-    <ol class="progtrckr" data-progtrckr-steps="5">
+    <ol class="progtrckr" data-progtrckr-steps="3">
         <li class="progtrckr-done">Processing</li>
-        <!-- <li class="progtrckr-done">Pre-Production</li> -->
-        <!-- <li class="progtrckr-done">In Production</li> -->
         <li class="progtrckr-done">Shipped</li>
         <li class="progtrckr-done">Delivered</li>
     </ol>
     {% else %}
-    <ol class="progtrckr" data-progtrckr-steps="5">
+    <ol class="progtrckr" data-progtrckr-steps="3">
         <li class="progtrckr-done">Processing</li>
-        <!-- <li class="progtrckr-done">Pre-Production</li>
-        <li class="progtrckr-done">In Production</li> -->
         <li class="progtrckr-done">Shipped</li>
         <li class="progtrckr-done">Delivered</li>
     </ol>
     {% endif %}
     <br><br>
-<!-- </div> -->
+    </div>
 </div>
+<hr>
+<div class="row">
+    {% for item in items %}
+    <div class="col-6 col-md-4 col-lg-4 ">
+        <div class="box-element">
+            <center><img class = "row-image" style="height: 5em; width: 5em" src = "{{item.product.imageURL}}"></center>
+            <div class="product">
+                <div class="overflow-auto" style="height: 35px;"><center><h6><strong >{{item.product.name}}</strong></h6></center></div>
+                <center><h6 style="display: inline-block; "> {{item.product.price}} /-</h6></center>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock content %}

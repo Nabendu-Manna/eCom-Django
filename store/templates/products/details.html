@@ -2,18 +2,62 @@
 {% load static %}
 {% block content %}
 
+
+<script type="text/javascript">
+      $(document).ready(function(){
+          console.log('hi')
+          var updateBtns = document.getElementsByClassName('addToCart')
+          console.log(updateBtns.length)
+          for(i = 0; i < updateBtns.length; i++){
+              updateBtns[i].addEventListener('click', function(){
+                  var productId = this.dataset.product
+                  var action = this.dataset.action
+                  console.log('productId: ', productId, 'action:', action)
+                  $.ajax({
+                      type: "get",
+                      url: "/addToCart/",
+                      data: {productId: productId, action: action},
+                      success: function(data){
+                          console.log(data);
+                      },
+                      error: function(data){
+                          console.log('Error:', data);
+                      }
+                  })
+                  console.log('hi')
+                  console.log('hi')
+                  console.log(1+1)
+                  console.log('hi')
+                  $.ajax({
+                      type: "get",
+                      url: "/cartItems/",
+                      data: {},
+                      success: function(data){
+                        console.log('hiiiii')
+                        data++
+                        $('.cartItems').html(data)
+                      },
+                      error: function(data){
+                        $('.cartItems').html(data)
+                      }
+                  })
+              });
+          }
+      });
+  </script>
+
 <div class="row">
     <div class="col-lg-12">
-          <div class="box-element product">
-                <center><h2>Product Details</h2></center>
-          </div>
+        <div class="box-element product">
+            <a class="btn btn-outline-dark float-left" href="{% url 'index' %}">&#x21E6; </a> <center><h2>Product Details</h2></center>
+        </div>
     </div>
 </div><br>
 
-<div class="row">
+<div class="row box-element">
       <div class="col-md-4">
-            <div class="box-element product">
-                  <img class = "thumbnail" src = "{{data.image.url}}">
+            <div class="product">
+                  <img class = "thumbnail" src = "{{data.image.url}}"><hr>
                   <div class="box product">
                       <h6><strong> {{data.name}} </strong></h6>
                   </div>
@@ -21,16 +65,15 @@
       </div>
 
       <div class="col-md-8">
-            <div class="box-element product">
-            <div class="box-element product">
-                  <h6><strong> {{data.details}} </strong></h6>
-                  <br>
-                  <h4><strong> {{data.brand}} </strong></h4>
-                  <h4 style="display: inline-block; float: right"><strong>{{data.price}} /- </strong></h4>
-                  <br><br>
-                  <hr>
-                  <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-            </div>
+            <div class="product">
+            <!-- <div class="product"> -->
+                <h6><strong> {{data.details}} </strong></h6><hr>
+                <h4><strong> {{data.brandId}} </strong></h4>
+                <h4 style="display: inline-block; float: right"><strong>{{data.price}} /- </strong></h4>
+                <br>
+                <hr>
+                <button data-product="{{data.id}}" data-action="add" class="btn btn-outline-secondary add-btn addToCart">Add to Cart</button>
+            <!-- </div> -->
             </div>
       </div>
 </div>
