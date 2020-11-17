@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="box-element product">
-            <center><h2> Profile </h2></center>
+            <a class="btn btn-outline-dark float-left" href="{% url 'index' %}">&#x21E6; </a> <center><h2> Profile </h2></center>
         </div>
     </div>
 </div>
@@ -34,21 +34,32 @@
     </div>
     <div class="col-md-6">
 		<div class="box-element">
-			<div class="cart-row">
-                <!-- <div class="col-12"> -->
-                    <a class="btn btn-outline-dark col-12" href="{% url 'trackOrder' %}"> Track Order &#x21E8;</a>
-                <!-- </div> -->
-            </div><br>
-            <div  class="overflow-auto" style="height: 300px;">
-			{% for item in items %}
-			<div class="cart-row">
-                <div class="col-4"><img class="row-image" src="{{ item.product.imageURL }}"></div>
-				<div class="col-8">
-                    <p>{{ item.product.name }}</p>
-				    <p>${{ item.product.price|floatformat:2 }}</p>
-                    <p>${{ item.get_total|floatformat:2 }} &ensp; <b>X</b> &ensp; {{ item.quantity }}</p>
+			<!-- <div class="cart-row">
+                <div class="col-12">
+                    <a class="btn btn-outline-dark col-12" href="{% url 'trackOrder' %}"> Track All Order &#x21E8;</a>
+                </div>
+            </div> -->
+            <hr>
+            <div  class="overflow-auto" style="height: 360px;">
+            {% for item in orders %}
+            <div class="cart-row">
+                <!-- <div class="col-4"><img class="row-image" src="{{ item.product.imageURL }}"></div> -->
+                <div class="col-6">
+                    <p> Order ID - {{ item.id }}</p>
+                    <p style="font-size: 11px; color:cornflowerblue">{{ item.date_ordered }}</p>
+                    <!-- <img class="row-image" src="{{ item.orderitem.product.imageURL }}"> -->
+                    <!-- <p>${{ item.orderitem_set.product.price|floatformat:2 }}</p> -->
+                    <!-- <p>${{ item.get_total|floatformat:2 }} &ensp; <b>X</b> &ensp; {{ item.quantity }}</p> -->
                 </div>	
-			</div>
+                <div class="col-6">
+                    <a class="btn btn-outline-dark float-right"  href="{% url 'trackOrder' %}?id={{item.id}}"> Track Order &#x21E8;</a>
+                </div>
+                <!-- {% for item in items %} -->
+                    <!-- <img class="row-image" src="{{ item.product.imageURL }}">
+                    <p>{{ item.product.price|floatformat:2 }}</p> -->
+                <!-- {% endfor %} -->
+                <!-- <div class="col-2"><img class="row-image" src="{{ item.product.imageURL }}"></div> -->
+            </div>
             {% endfor %}
             </div>
         </div>

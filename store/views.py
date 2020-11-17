@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as djLogout
+from itertools import chain
 import datetime
 # def index(request):
 #     return HttpResponse("Hello, world. You're at the polls index.")
@@ -284,24 +285,36 @@ def checkoutUpload(request):
      return redirect('/')
 
 def trackOrder (request):
-     customer = request.user.customer
-     shippingAddress = ShippingAddress.objects.get(customer = customer)
-     context = {'shippingAddress': shippingAddress}
+     if request.method == 'GET':
+          oId = request.GET['id']
+          order = Order.objects.get(id = oId)
+          items = order.orderitem_set.all()
+          customer = request.user.customer
+          shippingAddress = ShippingAddress.objects.get(order = order.id)
+     # print(items[1].order)
+     context = {'shippingAddress': shippingAddress, 'items': items}
      return render(request, 'customer/trackOrder.html', context)
 
 def profile(request):
      customer = request.user.customer
-     order, created = Order.objects.get_or_create(customer = customer, complete = True)
-     items = order.orderitem_set.all()
+     orders = Order.objects.filter(customer = customer, complete = True)
+     # items = orders.orderitem_set.all()
+     # items = []
+     # for order in orders:
+     #      # i = Order.objects.get(id = order.id)
+     #      print(order.id)
+     #      print(order.date_ordered)
+     #      items = list(chain(items, Order.objects.all()))
+
+     # orders = list( chain(orders, Order.objects.filter(customer = customer, complete = False)))
      
      catagories = Catagories.objects.all()
      brands = Brands.objects.all()
      products = Product.objects.all()
      
-     context = {'items': items, 'catagories': catagories, 'brands': brands, 'products': products}
+     context = {'orders': orders, 'catagories': catagories, 'brands': brands, 'products': products}
      return render(request, 'customer/profile.html', context)
      
-
 
 #end user
 

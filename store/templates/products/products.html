@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="box-element product">
-            <center><h2>Products</h2></center>
+            <a class="btn btn-outline-dark float-left" href="{% url 'index' %}">&#x21E6; </a> <center><h2>Products</h2></center>
         </div>
     </div>
 </div>
@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-lg-12 p-4 mb-4 ">
         <div class="box-element bg-secondary product" style="border-radius: 10px">
-            <center><h2 style="color:rgb(253, 102, 102)">Result not found !</h2></center>
+            <a class="btn btn-outline-warning float-left" href="{% url 'index' %}">&#x21E6; </a> <center><h2 style="color:rgb(253, 102, 102)">Result not found !</h2></center>
         </div>
     </div>
 </div>
@@ -31,7 +31,7 @@
                 <hr>
                 <h6 style="display: inline-block;"><strong>{{item.price}} /-</strong></h6><br>
                 <button  class="btn col-lg-6 btn-outline-secondary add-btn" >Add to Cart</button>
-            <a class="btn col-lg-6 btn-outline-success" href="/details?id={{item.id}}">View</a>
+            <!-- <a class="btn col-lg-6 btn-outline-success" href="/details?id={{item.id}}">View</a> -->
             </div>
         </div>
     </div>

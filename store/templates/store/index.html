@@ -23,6 +23,9 @@
                         console.log('Error:', data);
                     }
                 })
+                console.log('hi')
+                console.log('hi')
+                console.log('hi')
                 $.ajax({
                     type: "get",
                     url: "/cartItems/",
@@ -79,7 +82,7 @@
     <div class="col-12 col-md-4 col-lg-3 ">
         <div class="box-element product">
             <a href="/details?id={{product.id}}"><img class = "thumbnail" src = "{{product.image.url}}"> </a>
-            <div class="box-element product">
+            <div class="product">
                 <div class="overflow-auto" style="height: 35px;"><a href="/details?id={{product.id}}"><center><h6><strong >{{product.name}}</strong></h6></center></a></div>
                 <center><h6 style="display: inline-block; "> {{product.price}} /-</h6></center>
                 <!-- <input type="hidden" id="productId" value="{{product.id}}"> -->
@@ -106,9 +109,9 @@
 <div class="row">
     {% for brand in brands %}
     <div class="col-6 col-md-3 col-lg-3">
-        <div class=" product">
+        <div class="box-element product">
                 <a href="byBrand?id={{brand.id}}"><img class = "thumbnail" src = "{{brand.image.url}}"> 
-                <div class="box-element product">
+                <div class="product">
                     <center><h6><strong>{{brand.name}}</strong></h6></center>
                 </div></a>
         </div>

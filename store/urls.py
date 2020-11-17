@@ -18,14 +18,14 @@ urlpatterns = [
     path('minusItem/',views.minusItem, name="minusItem"),
     path('trackOrder/',views.trackOrder, name="trackOrder"),
     path('profile/',views.profile, name="profile"),
-    
+    path('checkoutUpload', views.checkoutUpload, name="checkoutUpload"),
     #end user
     
     #Brand
     path('insertBrand/', views.insertBrand, name="insertBrand"),
     path('uploadBrand', views.uploadBrand, name="uploadBrand"),
     path('byBrand', views.byBrand, name="byBrand"),
-    path('checkoutUpload', views.checkoutUpload, name="checkoutUpload"),
+    
     #end Brand
     
     #Catagory
