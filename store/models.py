@@ -44,7 +44,7 @@ class Brands(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=50, null=True)
-    price = models.FloatField();
+    price = models.FloatField()
     details = models.CharField(max_length=150, null=True)
     image = models.ImageField(null=True, blank=True)
     catagoryId = models.ForeignKey(Catagories, null=True, blank=True, on_delete=models.CASCADE)
